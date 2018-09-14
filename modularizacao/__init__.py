@@ -1,6 +1,5 @@
-from modularizacao.frutas import (
-    g as _g,
-    citricas as _citricas
-)
+from modularizacao.frutas import *
 
-f = _g
+
+print(g)
+# print(citricas)

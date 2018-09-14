@@ -1,5 +1,9 @@
+__all__ = ['g']
+
+
 def g():
     return 'Olá Mundo'
+
 
 def citricas():
     return 'Limão', 'Laranja'
