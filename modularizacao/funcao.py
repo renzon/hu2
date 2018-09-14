@@ -16,11 +16,18 @@ name = 'Luciano Ramalho Python'.split()
 print(f(*name))
 
 
-def soma(*args, **kwargs):
-    return args, kwargs
+def soma(a, *args, last=9, **parcelas):
+    return a, last, args, parcelas
 
 
-print(soma())
+print(soma(8))
 print(soma(0))
 print(soma(0, 3))
 print(soma(0, 3, 5, name='Renzo', foo='bar'))
+
+person = {
+    'name': 'Henzo',
+    'age': 36,
+    'last': 6,
+}
+print(soma(0, *person, **person))
