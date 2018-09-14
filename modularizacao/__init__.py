@@ -1,4 +1,4 @@
-from modularizacao.frutas import *
+from .frutas import g
 
 
 print(g)
