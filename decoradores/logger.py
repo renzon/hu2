@@ -2,21 +2,24 @@ from functools import wraps
 from time import strftime
 
 
-def log(f):
-    @wraps(f)
-    def f_logada(*args, **kwargs):
-        print(strftime('%H:%M:%S'))
-        return f(*args, **kwargs)
+def log(*, fmt):
+    def decorator(f):
+        @wraps(f)
+        def f_logada(*args, **kwargs):
+            print(strftime(fmt))
+            return f(*args, **kwargs)
 
-    return f_logada
+        return f_logada
+
+    return decorator
 
 
-@log
+@log(fmt='%H:%M:%S')
 def tratar_request():
     print('Tratando request')
 
 
-@log
+@log(fmt='%Y/%m/%d %H:%M:%S')
 def ola(nome):
     """ Função que imprime o nome
 
