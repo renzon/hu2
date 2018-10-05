@@ -2,16 +2,29 @@ from functools import wraps
 from time import strftime
 
 
-def log(*, fmt):
-    def decorator(f):
+# def log(*, fmt):
+#     def decorator(f):
+#         @wraps(f)
+#         def f_logada(*args, **kwargs):
+#             print(strftime(fmt))
+#             return f(*args, **kwargs)
+#
+#         return f_logada
+#
+#     return decorator
+#
+
+class log:
+    def __init__(self, *, fmt):
+        self.fmt = fmt
+
+    def __call__(self, f):
         @wraps(f)
         def f_logada(*args, **kwargs):
-            print(strftime(fmt))
+            print(strftime(self.fmt))
             return f(*args, **kwargs)
 
         return f_logada
-
-    return decorator
 
 
 @log(fmt='%H:%M:%S')
