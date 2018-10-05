@@ -1,3 +1,4 @@
+
 class Pessoa:
     olhos = 2
 
@@ -6,6 +7,8 @@ class Pessoa:
     def __init__(self, nome='Renzo', idade=36):
         self._idade = idade
         self.nome = nome
+
+
 
     @property
     def idade(self):
@@ -20,12 +23,20 @@ class Pessoa:
     def __str__(self):
         return f'{self.nome}: {self.idade}'
 
+    def __getattribute__(self, item:str):
+        print(item)
+        if item.startswith('_'):
+            raise AttributeError('Acesso a atributo com _ não permitido')
+        return getattr(self, item)
+
+
 
 renzo = Pessoa()
 
 # renzo.idade = -1
-# renzo.idade = -1
-print(renzo._idade)
+renzo.idade = 1
+# print(renzo._idade)
+print(renzo.lkhsgdflkasfd)
 print(renzo.idade)
 print(renzo)
 
