@@ -2,34 +2,34 @@ from functools import wraps
 from time import strftime
 
 
-# def log(*, fmt):
-#     def decorator(f):
+#
+
+# class log:
+#     def __init__(self, *, fmt):
+#         self.fmt = fmt
+#
+#     def __call__(self, f):
 #         @wraps(f)
 #         def f_logada(*args, **kwargs):
-#             print(strftime(fmt))
+#             print(strftime(self.fmt))
 #             return f(*args, **kwargs)
 #
 #         return f_logada
-#
-#     return decorator
-#
 
-class log:
-    def __init__(self, *, fmt):
-        self.fmt = fmt
 
-    def __call__(self, f):
+def log(g=None, *, fmt='%H:%M:%S'):
+    if g is not None:
+        return log(fmt=fmt)(g)
+
+    def decorator(f):
         @wraps(f)
         def f_logada(*args, **kwargs):
-            print(strftime(self.fmt))
+            print(strftime(fmt))
             return f(*args, **kwargs)
 
         return f_logada
 
-
-@log(fmt='%H:%M:%S')
-def tratar_request():
-    print('Tratando request')
+    return decorator
 
 
 @log(fmt='%Y/%m/%d %H:%M:%S')
@@ -40,6 +40,11 @@ def ola(nome):
     :return:
     """
     print(f'Olá {nome}')
+
+
+@log
+def tratar_request():
+    print('Tratando request')
 
 
 # tratar_request = log(tratar_request)
